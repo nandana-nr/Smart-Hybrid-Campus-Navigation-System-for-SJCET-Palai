@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7faff" />
+  <title>SJCET Navigator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <path d="M8 30.5 53 8.5c3.5-1.7 6.9 1.8 5.1 5.3L36.2 58c-1.8 3.1-6.5 2.3-7.2-1.2l-3.7-18.1L8.5 35.9C5 34.8 4.7 32.1 8 30.5Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+          <path d="m25.5 38.7 10.7-10.6" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">SJCET Navigator</div>
+        <div class="brand-subtitle">St. Joseph's College of Engineering &amp; Technology, Palai</div>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <button class="nav-item active" data-panel="map">
+        <span class="nav-icon">⌖</span> Map
+      </button>
+      <button class="nav-item" data-panel="facilities">
+        <span class="nav-icon">⌂</span> Facilities
+      </button>
+      <button class="nav-item" data-panel="events">
+        <span class="nav-icon">▣</span> Events
+      </button>
+      <button class="admin-btn" id="adminOpen">
+        <span>♙</span> Admin Login
+      </button>
+    </nav>
+  </header>
+
+  <main class="map-stage" id="mapStage">
+    <div class="aerial-layer"></div>
+    <div class="map-shade"></div>
+
+    <section class="search-card glass">
+      <div class="card-heading">
+        <span class="pin-icon">●</span>
+        <h1>Where do you want to go?</h1>
+      </div>
+
+      <div class="location-row">
+        <div class="field-icon blue">◎</div>
+        <input id="currentLocation" value="Your current location" aria-label="Current location" />
+        <button class="field-action" id="locateBtn" title="Use current location">⌾</button>
+      </div>
+
+      <div class="location-row">
+        <div class="field-icon red">●</div>
+        <input id="destination" placeholder="Search destination (building, room, facility)" aria-label="Destination" />
+        <button class="field-action" id="searchBtn" title="Search">⌕</button>
+      </div>
+
+      <div class="popular-head">
+        <span>Popular destinations</span>
+        <button id="viewAll">View all</button>
+      </div>
+
+      <div class="popular-grid">
+        <button class="destination-chip" data-destination="St. Joseph's Block">
+          <span class="chip-icon orange">⌂</span><span>St. Joseph's<br>Block</span>
+        </button>
+        <button class="destination-chip" data-destination="St. Peter's Block">
+          <span class="chip-icon purple">⌂</span><span>St. Peter's<br>Block</span>
+        </button>
+        <button class="destination-chip" data-destination="St. Francis Block">
+          <span class="chip-icon teal">⌂</span><span>St. Francis<br>Block</span>
+        </button>
+        <button class="destination-chip" data-destination="Madonna Cafeteria">
+          <span class="chip-icon pink">♜</span><span>Madonna<br>Cafeteria</span>
+        </button>
+        <button class="destination-chip" data-destination="Sports Ground">
+          <span class="chip-icon slate">◉</span><span>Sports<br>Ground</span>
+        </button>
+      </div>
+
+      <button class="qr-entry" id="qrOpen">
+        <span class="qr-symbol">▦</span>
+        <span><strong>Going indoors?</strong><small>Scan Campus QR to initialize your indoor position</small></span>
+        <span class="chevron">›</span>
+      </button>
+    </section>
+
+    <section class="route-card glass hidden" id="routeCard">
+      <div class="route-top">
+        <div>
+          <div class="route-label">ROUTE TO</div>
+          <div class="route-destination" id="routeDestination">St. Joseph's Block</div>
+        </div>
+        <button id="closeRoute" class="round-close">×</button>
+      </div>
+      <div class="route-stats">
+        <div><strong id="routeEta">4 min</strong><span>ETA</span></div>
+        <div><strong id="routeDistance">320 m</strong><span>Distance</span></div>
+        <div><strong>Walking</strong><span>Mode</span></div>
+      </div>
+      <div class="route-progress"><span></span></div>
+      <div class="next-step"><span>➜</span><div><b>Head towards the destination</b><small>Follow the campus route from your current location.</small></div></div>
+    </section>
+
+    <div class="map-switch glass">
+      <button class="switch active" id="aerialBtn">Aerial</button>
+      <button class="switch" id="mapBtn">Map</button>
+    </div>
+
+    <button class="layers-control glass" title="Map layers">▱</button>
+
+    <div class="map-controls">
+      <button class="control glass" id="recenterBtn" title="Recenter">⌾</button>
+      <div class="zoom-group glass">
+        <button class="control" id="zoomIn">+</button>
+        <button class="control" id="zoomOut">−</button>
+      </div>
+      <button class="control glass compass" title="Orientation">▲</button>
+    </div>
+
+    <div class="weather-card glass">
+      <span class="weather-icon">☁️</span>
+      <div><b>26°C</b><small>Palai, Kerala</small></div>
+    </div>
+
+    <div class="campus-tag glass">
+      <span>●</span>
+      <div><b>SJCET Campus</b><small>Palai, Kerala</small></div>
+    </div>
+  </main>
+
+  <!-- QR Modal -->
+  <div class="modal-backdrop" id="qrModal">
+    <div class="modal">
+      <button class="modal-close" data-close="qrModal">×</button>
+      <div class="modal-icon">▦</div>
+      <h2>Initialize Indoor Navigation</h2>
+      <p>Scan the QR code at a campus building entrance to initialize your indoor position.</p>
+      <div class="qr-box"><div class="fake-qr"></div></div>
+      <button class="primary-btn" id="simulateScan">Simulate QR Scan</button>
+      <div class="success-message hidden" id="qrSuccess">Indoor position initialized successfully.</div>
+    </div>
+  </div>
+
+  <!-- Facilities Modal -->
+  <div class="modal-backdrop" id="facilitiesModal">
+    <div class="modal wide">
+      <button class="modal-close" data-close="facilitiesModal">×</button>
+      <div class="modal-icon">⌂</div>
+      <h2>Campus Facilities</h2>
+      <div class="info-grid">
+        <div class="info-item"><b>Central Library</b><span>Library &amp; learning resources</span></div>
+        <div class="info-item"><b>Madonna Cafeteria</b><span>Food &amp; refreshments</span></div>
+        <div class="info-item"><b>Food Court</b><span>Campus dining facility</span></div>
+        <div class="info-item"><b>Sports Ground</b><span>Sports &amp; recreation</span></div>
+        <div class="info-item"><b>Seminar Halls</b><span>Events &amp; academic programmes</span></div>
+        <div class="info-item"><b>Academic Blocks</b><span>Rooms, labs &amp; offices</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events Modal -->
+  <div class="modal-backdrop" id="eventsModal">
+    <div class="modal wide">
+      <button class="modal-close" data-close="eventsModal">×</button>
+      <div class="modal-icon">▣</div>
+      <h2>Campus Events</h2>
+      <div class="event-list">
+        <div class="event-item"><div class="event-date"><b>ASTHRA</b><span>Technical Fest</span></div><button data-destination="Asthra Venue">Navigate</button></div>
+        <div class="event-item"><div class="event-date"><b>Campus Programme</b><span>Venue information</span></div><button data-destination="Main Seminar Hall">Navigate</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login -->
+  <div class="modal-backdrop" id="adminModal">
+    <div class="modal">
+      <button class="modal-close" data-close="adminModal">×</button>
+      <div class="modal-icon">♙</div>
+      <h2>Admin Login</h2>
+      <p>Authorized college administrators can update campus information.</p>
+      <form id="adminForm">
+        <label>Email<input type="email" id="adminEmail" placeholder="admin@sjcetpalai.ac.in" required></label>
+        <label>Password<input type="password" id="adminPassword" placeholder="Password" required></label>
+        <button class="primary-btn" type="submit">Login</button>
+        <div class="error-message hidden" id="adminError">Invalid demo credentials.</div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

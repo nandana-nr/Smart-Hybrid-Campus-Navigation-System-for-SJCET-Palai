@@ -1,0 +1,60 @@
+*{box-sizing:border-box}
+:root{--blue:#0d73e8;--ink:#12213c;--muted:#71809b;--glass:rgba(255,255,255,.93);--border:rgba(15,38,70,.11)}
+html,body{margin:0;width:100%;height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);overflow:hidden}
+button,input{font:inherit}
+button{cursor:pointer;border:0}
+.topbar{height:78px;background:rgba(250,252,255,.97);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:relative;z-index:20;border-bottom:1px solid #e8edf5}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-icon{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#17b6c5,#0877ea);color:white;display:grid;place-items:center;box-shadow:0 7px 20px rgba(0,126,210,.22)}
+.brand-icon svg{width:32px;height:32px}
+.brand-title{font-weight:800;font-size:21px;letter-spacing:-.4px}
+.brand-subtitle{font-size:12px;color:#7a879d;margin-top:2px}
+.main-nav{display:flex;align-items:center;gap:6px}
+.nav-item,.admin-btn{height:46px;padding:0 18px;border-radius:13px;background:transparent;color:#26334d;font-weight:650;display:flex;align-items:center;gap:9px}
+.nav-item.active{background:#e7f1ff;color:#0872df}
+.nav-icon{font-size:20px;line-height:1}
+.admin-btn{margin-left:12px;border:1px solid #d8e1ee;background:#fbfdff}
+.admin-btn:hover,.nav-item:hover{background:#edf5ff}
+.map-stage{height:calc(100vh - 78px);position:relative;overflow:hidden;background:#cfd8cf}
+.aerial-layer{position:absolute;inset:0;background-image:url("sjcet-aerial.jpg");background-size:cover;background-position:center 49%;transform:scale(1.02);transition:transform .25s ease,filter .25s ease}
+.map-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,28,46,.10),rgba(11,28,46,0) 45%,rgba(11,28,46,.04))}
+.glass{background:var(--glass);border:1px solid rgba(255,255,255,.72);box-shadow:0 15px 40px rgba(20,40,70,.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.search-card{position:absolute;left:25px;top:24px;width:560px;border-radius:20px;padding:20px 20px 15px}
+.card-heading{display:flex;align-items:center;gap:11px;margin-bottom:15px}
+.card-heading h1{font-size:21px;margin:0;letter-spacing:-.4px}
+.pin-icon{width:29px;height:29px;background:#e9f2ff;color:#0b73e6;border-radius:50%;display:grid;place-items:center;font-size:14px}
+.location-row{height:54px;border:1px solid #dbe3ee;background:#fff;border-radius:13px;display:flex;align-items:center;padding:0 12px;margin-bottom:10px;box-shadow:0 2px 5px rgba(25,45,75,.03)}
+.field-icon{font-size:22px;width:34px;text-align:center}
+.field-icon.blue{color:#0d78ed}.field-icon.red{color:#f04755}
+.location-row input{border:0;outline:0;flex:1;color:#697891;background:transparent;font-size:15px}
+.location-row input:focus{color:#1c2a43}
+.field-action{width:34px;height:34px;border-radius:9px;background:#f4f7fb;color:#263650;font-size:20px}
+.popular-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#60708a;margin:16px 6px 10px}
+.popular-head button{background:none;color:#0875e8;font-weight:700}
+.popular-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+.destination-chip{height:84px;background:#fff;border:1px solid #e0e7f0;border-radius:12px;color:#283650;font-size:11px;font-weight:650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 2px 7px rgba(30,50,80,.04);transition:.15s}
+.destination-chip:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(20,60,100,.12)}
+.chip-icon{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;font-size:17px}
+.orange{color:#f58217;background:#fff1e2}.purple{color:#6748e9;background:#eeeaff}.teal{color:#12a995;background:#e4f8f4}.pink{color:#ef4c76;background:#ffedf2}.slate{color:#485975;background:#edf1f7}
+.qr-entry{margin-top:13px;width:100%;height:49px;border-radius:12px;background:#f4f8fe;border:1px solid #dce8f8;display:flex;align-items:center;padding:0 13px;text-align:left;color:#21324e;gap:11px}
+.qr-entry:hover{background:#eaf3ff}
+.qr-symbol{width:31px;height:31px;border-radius:8px;background:#fff;color:#0b74e5;display:grid;place-items:center;font-size:20px}
+.qr-entry strong{font-size:12px;display:block}.qr-entry small{display:block;color:#75839a;font-size:10px;margin-top:2px}.chevron{margin-left:auto;font-size:23px;color:#7b8ba3}
+.route-card{position:absolute;left:25px;top:405px;width:390px;border-radius:18px;padding:17px}
+.route-card.hidden{display:none}
+.route-top{display:flex;justify-content:space-between}.route-label{font-size:10px;font-weight:800;letter-spacing:1.1px;color:#7b8ba3}.route-destination{font-size:17px;font-weight:800;margin-top:3px}.round-close{width:28px;height:28px;border-radius:50%;background:#f0f4f8;color:#61708a}
+.route-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.route-stats div{background:#f5f8fc;border-radius:10px;padding:9px}.route-stats strong{display:block;font-size:13px}.route-stats span{font-size:10px;color:#8190a7}
+.route-progress{height:5px;background:#e7edf5;border-radius:99px;margin:13px 0}.route-progress span{display:block;width:35%;height:100%;background:#0877e8;border-radius:99px}
+.next-step{display:flex;gap:10px;align-items:center;font-size:13px}.next-step>span{color:#0b76e7;font-size:21px}.next-step b{display:block}.next-step small{color:#7a899f;font-size:10px}
+.map-switch{position:absolute;right:82px;top:24px;padding:4px;border-radius:14px;display:flex}.switch{height:38px;padding:0 18px;border-radius:10px;background:transparent;color:#5f6f87;font-weight:700}.switch.active{background:#0877e8;color:#fff}
+.layers-control{position:absolute;right:25px;top:24px;width:46px;height:46px;border-radius:14px;font-size:22px;color:#31415d}
+.map-controls{position:absolute;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;align-items:center}.control{width:48px;height:48px;background:rgba(255,255,255,.94);color:#2d3c57;font-size:25px}.zoom-group{border-radius:15px;overflow:hidden;display:flex;flex-direction:column}.zoom-group .control{border-radius:0;height:44px}.compass{font-size:17px;color:#e32632}
+.weather-card{position:absolute;left:24px;bottom:20px;height:56px;border-radius:14px;padding:0 15px;display:flex;align-items:center;gap:10px;color:#1f2e48}.weather-icon{font-size:23px}.weather-card b,.campus-tag b{display:block;font-size:12px}.weather-card small,.campus-tag small{display:block;font-size:10px;color:#73829a;margin-top:1px}
+.campus-tag{position:absolute;right:24px;bottom:20px;height:56px;border-radius:14px;padding:0 15px;display:flex;align-items:center;gap:10px;color:#24334e}.campus-tag>span{font-size:19px;color:#fff;text-shadow:0 1px 4px #000}
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,23,40,.42);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}.modal-backdrop.open{display:flex}
+.modal{width:min(430px,100%);background:#fff;border-radius:22px;padding:28px;position:relative;box-shadow:0 30px 90px rgba(0,0,0,.28)}.modal.wide{width:min(650px,100%)}.modal-close{position:absolute;right:17px;top:15px;width:34px;height:34px;border-radius:50%;background:#f1f4f8;color:#66758c;font-size:21px}.modal-icon{width:52px;height:52px;border-radius:15px;background:#eaf3ff;color:#0876e7;display:grid;place-items:center;font-size:27px;margin-bottom:15px}.modal h2{margin:0 0 7px;font-size:21px}.modal p{margin:0 0 20px;color:#718099;font-size:13px;line-height:1.55}.qr-box{height:190px;width:190px;margin:10px auto 18px;background:#fff;border:10px solid #fff;box-shadow:0 0 0 1px #e0e6ef;display:grid;place-items:center}.fake-qr{width:150px;height:150px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 50%/18px 18px;position:relative}.fake-qr:after{content:"";position:absolute;inset:16px;background:repeating-conic-gradient(#fff 0 25%,#111 0 50%) 50%/12px 12px;opacity:.92}.primary-btn{width:100%;height:46px;border-radius:12px;background:#0877e8;color:#fff;font-weight:750}.primary-btn:hover{background:#0668cc}.success-message,.error-message{margin-top:10px;padding:10px;border-radius:10px;font-size:12px}.success-message{background:#eaf9f2;color:#148151}.error-message{background:#fff0f0;color:#c42e3c}.hidden{display:none!important}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}.info-item{padding:15px;border:1px solid #e2e8f0;border-radius:13px;background:#f9fbfe}.info-item b{display:block;font-size:13px}.info-item span{font-size:11px;color:#7b899e;display:block;margin-top:4px}
+.event-list{display:grid;gap:10px;margin-top:17px}.event-item{display:flex;align-items:center;justify-content:space-between;padding:15px;border:1px solid #e2e8f0;border-radius:13px}.event-date b{display:block;font-size:13px}.event-date span{font-size:11px;color:#7b899e}.event-item button{background:#eaf3ff;color:#0877e8;padding:8px 12px;border-radius:9px;font-weight:700}
+.modal label{display:block;font-size:12px;font-weight:700;margin:12px 0;color:#42526c}.modal label input{display:block;width:100%;height:45px;margin-top:6px;border:1px solid #dbe3ed;border-radius:10px;padding:0 12px;outline:none}.modal label input:focus{border-color:#75aef0;box-shadow:0 0 0 3px #e9f3ff}
+@media(max-width:900px){.topbar{padding:0 14px}.brand-subtitle{display:none}.main-nav{gap:2px}.nav-item{padding:0 9px}.nav-item:not(.active){display:none}.admin-btn{margin-left:2px;padding:0 10px}.search-card{width:min(560px,calc(100% - 24px));left:12px;top:12px}.popular-grid{grid-template-columns:repeat(5,1fr)}.route-card{left:12px;top:auto;bottom:90px;width:min(390px,calc(100% - 24px))}.map-switch{right:72px;top:12px}.layers-control{right:12px;top:12px}.map-controls{right:12px}.campus-tag{right:12px}.weather-card{left:12px}}
+@media(max-width:620px){.topbar{height:66px}.map-stage{height:calc(100vh - 66px)}.brand-icon{width:40px;height:40px}.brand-title{font-size:17px}.main-nav .nav-item.active{display:flex}.admin-btn{font-size:11px}.search-card{padding:15px}.card-heading h1{font-size:18px}.popular-grid{gap:5px}.destination-chip{height:73px;font-size:9px}.chip-icon{width:25px;height:25px;font-size:14px}.weather-card{bottom:12px}.campus-tag{bottom:12px}.map-controls{top:auto;bottom:95px;transform:none}.map-switch{top:12px}.info-grid{grid-template-columns:1fr}}
